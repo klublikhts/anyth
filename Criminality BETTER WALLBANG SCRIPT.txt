@@ -1,4 +1,4 @@
--- Made by peke#7374 (shitass)
+
 -- First, Safely Set the parent of the parts inside the Parts folder. Not removing the folder (Vibe check / subway)
 for i,v in pairs(workspace.Map.Parts:GetChildren()) do
     if v:IsA("Model") or v:IsA("Folder") or v:IsA("Part") then
