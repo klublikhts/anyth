@@ -1,0 +1,36 @@
+-- Made by peke#7374 (shitass)
+-- First, Safely Set the parent of the parts inside the Parts folder. Not removing the folder (Vibe check / subway)
+for i,v in pairs(workspace.Map.Parts:GetChildren()) do
+    if v:IsA("Model") or v:IsA("Folder") or v:IsA("Part") then
+        if v.Name ~= "M_Parts" then
+                v.Parent = workspace:FindFirstChild('Characters')
+        end
+    end
+end
+-- Then, Set The parent of the parts inside the M_Parts folder. Not removing the folder (General map)
+for i,v in pairs(workspace.Map.Parts.M_Parts:GetChildren()) do
+    v.Parent = workspace:FindFirstChild('Characters')
+end
+
+-- Constantly checks if a child is added to the M_Parts folder. Moves it to characters if it is. If its not it returns and checks next (ik its a shitty way to do it)
+workspace.Map.Parts.M_Parts.ChildAdded:Connect(function(Part)
+for i,v in pairs(workspace.Map.Parts.M_Parts:GetChildren()) do
+    if v:IsA("Script") or v:IsA("LocalScript") then
+        return
+    else
+        v.Parent = workspace:FindFirstChild('Characters')
+    end
+end
+end)
+
+-- Constantly checks if a part is added to the Parts folder. Makes sure its not the mparts folder so the scripts dont break.
+game.Workspace.Map.Parts.ChildAdded:Connect(function(Part)
+    for i,v in pairs(game.Workspace.Map.Parts:GetChildren()) do
+        if v:IsA("Model") or v:IsA("Folder") or v:IsA("Part") then
+            if v.Name ~= "M_Parts" then
+                    v.Parent = workspace:FindFirstChild('Characters')
+                end
+            end
+        end
+    end
+end)
